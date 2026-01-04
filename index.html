@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomson C R | Finance & Strategy</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #334155;
+            --accent: #0ea5e9;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Generic Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.25rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* Timeline / Experience */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        .role {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .company-name {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .duration {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-placeholder-img {
+            background: linear-gradient(45deg, #cbd5e1, #e2e8f0);
+            height: 200px;
+            width: 100%;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-tag {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            margin: 1rem 0 0.5rem;
+            color: var(--primary);
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Simple hiding for mobile demo */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Thomson.</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#blog">Blog</a>
+                <a href="resume.html" target="_blank" style="color: var(--accent);">View Resume</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>Expertise in Banking & Financial Strategy</h1>
+            <p class="subtitle">Hi, I'm Thomson C R. I help organizations drive growth through strategic sales
+                management and robust credit administration in the NBFC sector.</p>
+            <a href="#contact" class="cta-btn">Get in Touch</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    With over 12 years of specialized experience in the Indian financial sector, I have dedicated my
+                    career to mastering the nuances of <strong>Home Loans</strong> and <strong>Mortgages</strong>.
+                </p>
+                <p>
+                    I excel at building high-performing teams, managing intricate channel partner networks, and
+                    balancing aggressive sales targets with rigorous credit risk management. My philosophy is simple:
+                    sustainable growth comes from a foundation of trust and operational excellence.
+                </p>
+            </div>
+            <div style="display: grid; gap: 1rem;">
+                <div class="stat-box">
+                    <span class="stat-number">12+</span>
+                    <span>Years Experience</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">4</span>
+                    <span>Major Institutions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Professional Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="role">Sales Manager</div>
+                <div class="company-name">Aditya Birla Housing Finance Ltd</div>
+                <span class="duration">May 2024 – Present</span>
+                <p>Driving strategic business planning and channel management for the Mysore region. Spearheading
+                    customer service initiatives while maintaining strict credit quality controls.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="role">Sales Manager</div>
+                <div class="company-name">Tata Capital Ltd</div>
+                <span class="duration">Oct 2023 – April 2024</span>
+                <p>Managed branch sales operations and fraud prevention strategies. Successfully built relationships
+                    with builders and key property agents.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="role">Sales Manager</div>
+                <div class="company-name">ICICI Home Finance Ltd</div>
+                <span class="duration">Feb 2019 – Aug 2023</span>
+                <p>Expanded the loan book significantly through diverse channels. Focused on risk mitigation and ensured
+                    100% compliance with RBI guidelines.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" style="background-color: #f1f5f9;">
+        <h2 class="section-title">Latest Thoughts</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem auto; color: var(--text-light);">
+            Insights on the evolving landscape of Non-Banking Financial Companies and the future of housing finance in
+            India.
+        </p>
+
+        <div class="blog-grid">
+            <!-- Blog Post 1 -->
+            <article class="blog-card">
+                <div class="blog-placeholder-img" style="background: linear-gradient(120deg, #3b82f6, #1d4ed8);"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Industry Trends</span>
+                    <h3 class="blog-title">The Rise of Digital Lending in NBFCs</h3>
+                    <p style="font-size: 0.9rem; color: #64748b;">
+                        How digital KYC and AI-driven credit scoring are transforming the turn-around time (TAT) for
+                        home loans...
+                    </p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-card">
+                <div class="blog-placeholder-img" style="background: linear-gradient(120deg, #10b981, #059669);"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Risk Management</span>
+                    <h3 class="blog-title">Mitigating Fraud in Mortgage Loans</h3>
+                    <p style="font-size: 0.9rem; color: #64748b;">
+                        Top strategies for Credit Managers to detect document discrepancies early in the sourcing
+                        phase...
+                    </p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 3 -->
+            <article class="blog-card">
+                <div class="blog-placeholder-img" style="background: linear-gradient(120deg, #f59e0b, #d97706);"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Leadership</span>
+                    <h3 class="blog-title">Building High-Performance Sales Teams</h3>
+                    <p style="font-size: 0.9rem; color: #64748b;">
+                        Why mentorship and continuous training are more effective than just setting aggressive
+                        targets...
+                    </p>
+                    <a href="#" class="read-more">Read Article →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Open to consulting opportunities, speaking engagements, or full-time leadership roles.
+            </p>
+            <a href="mailto:sony.thomsoncr2@gmail.com"
+                style="display: inline-block; font-size: 1.5rem; text-decoration: none; color: var(--accent); font-weight: bold; margin-bottom: 1rem;">
+                sony.thomsoncr2@gmail.com
+            </a>
+            <p>+91 9686293737</p>
+            <p>Mysore, India</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Thomson C R. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Widget -->
+    <div id="ai-widget-launcher" class="ai-launcher">
+        <div class="ai-launcher-icon">🤖</div>
+        <div class="ai-launcher-text">Check Loan Eligibility (AI)</div>
+    </div>
+
+    <div id="ai-chat-window" class="ai-window">
+        <div class="ai-header">
+            <div class="ai-title">
+                <span>🤖</span> Thomson's AI Assistant
+            </div>
+            <button class="ai-close" onclick="toggleChat()">×</button>
+        </div>
+        <div class="ai-body" id="ai-messages">
+            <div class="ai-msg bot">
+                Hi! I'm Thomson's AI Agent. 🤖<br>
+                I can scan policies from <strong>20+ Banks & NBFCs</strong> to find your best loan offer.<br><br>
+                You can also Call/WhatsApp Thomson at <strong>+91 9686293737</strong>.<br><br>
+                Want me to check your eligibility or Contact me?
+            </div>
+        </div>
+        <div class="ai-footer">
+            <input type="text" id="ai-input" placeholder="Type here..." onkeypress="handleEnter(event)">
+            <button class="ai-send" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <style>
+        /* AI Widget Styles */
+        .ai-launcher {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 9999;
+            transition: transform 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        .ai-launcher:hover {
+            transform: scale(1.05);
+        }
+
+        .ai-launcher-icon {
+            font-size: 1.5rem;
+        }
+
+        .ai-launcher-text {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .ai-window {
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: none;
+            /* Hidden by default */
+            flex-direction: column;
+            z-index: 9999;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .ai-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .ai-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-msg {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .ai-msg.bot {
+            background: white;
+            border: 1px solid #e2e8f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .ai-msg.user {
+            background: var(--accent);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai-footer {
+            padding: 0.8rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #ai-input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .ai-send {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+
+    <script>
+        const launcher = document.getElementById('ai-widget-launcher');
+        const chatWindow = document.getElementById('ai-chat-window');
+        const messagesLine = document.getElementById('ai-messages');
+        const inputField = document.getElementById('ai-input');
+
+        let step = 0;
+        let userData = {};
+
+        launcher.addEventListener('click', toggleChat);
+
+        function toggleChat() {
+            if (chatWindow.style.display === 'flex') {
+                chatWindow.style.display = 'none';
+                launcher.style.display = 'flex';
+            } else {
+                chatWindow.style.display = 'flex';
+                launcher.style.display = 'none';
+                if (step === 0) {
+                    // Initial prompt
+                }
+            }
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            // Add User Message
+            addMessage(text, 'user');
+            inputField.value = '';
+
+            // Bot Logic (Simulating AI)
+            setTimeout(() => {
+                processBotResponse(text);
+            }, 800);
+        }
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `ai-msg ${sender}`;
+            div.innerHTML = text;
+            messagesLine.appendChild(div);
+            messagesLine.scrollTop = messagesLine.scrollHeight;
+        }
+
+        function processBotResponse(input) {
+            if (step === 0) {
+                step = 1;
+                addMessage("Great! First, what kind of loan are you looking for? (Home Loan, Mortgage, Personal, etc.)", 'bot');
+            }
+            else if (step === 1) {
+                userData.loanType = input;
+                step = 2;
+                addMessage(`Okay, looking for <strong>${userData.loanType}</strong>. 🏦<br>I can check rates from ICICI, Tata Capital, and HDFC.<br>What is your required **Loan Amount**?`, 'bot');
+            }
+            else if (step === 2) {
+                userData.amount = input;
+                step = 3;
+                addMessage("Got it. Just one last thing - what is your **Phone Number**? <br>Thomson uses this to send you the eligible bank list.", 'bot');
+            }
+            else if (step === 3) {
+                userData.phone = input;
+                step = 4;
+                addMessage("🔍 <strong>Scanning 24 Banks & NBFCs...</strong>", 'bot');
+
+                // Simulate "Crawling"
+                setTimeout(() => {
+                    addMessage("✅ <strong>Match Found!</strong><br>Based on your profile, you may be eligible for a rate as low as <strong>8.5%</strong>.<br><br>I have sent your details to Thomson. He will call you at " + userData.phone + " with the specific offers.", 'bot');
+
+                    console.log("LEAD CAPTURED:", userData); // In a real app, this would be an API call
+                }, 1500);
+            }
+            else {
+                addMessage("I've already captured your request! Thomson will be in touch shortly. 😎", 'bot');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

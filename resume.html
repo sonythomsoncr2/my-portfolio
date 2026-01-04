@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomson C R - Resume</title>
+    <style>
+        /* Base Styles for Screen and Logic */
+        :root {
+            --text-color: #333;
+            --secondary-color: #666;
+            --accent-color: #2c3e50;
+            --bg-color: #f9f9f9;
+            --container-bg: #ffffff;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --btn-color: #2c3e50;
+            --btn-hover: #34495e;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            text-align: center;
+            /* Centering body for web view */
+        }
+
+        /* Action Buttons */
+        .actions {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: var(--btn-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+            display: inline-block;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--btn-hover);
+        }
+
+        /* Icons */
+        .icon {
+            width: 1.2em;
+            height: 1.2em;
+            fill: currentColor;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+
+        /* Main Container */
+        .container {
+            background-color: var(--container-bg);
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            /* Center container */
+            padding: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            text-align: left;
+            /* Reset text align for content */
+            box-sizing: border-box;
+        }
+
+        /* Resume Content Styles - Word Compatible (No Flex/Grid) */
+        header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .contact-info span {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+            clear: both;
+            /* Clear floats */
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            /* Clearfix */
+        }
+
+        .skills-list li {
+            float: left;
+            background-color: #f0f4f8;
+            padding: 0.3rem 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            border: 1px solid #e1e8ed;
+        }
+
+        /* Job Block Styling */
+        .job {
+            margin-bottom: 1.5rem;
+            page-break-inside: avoid;
+            /* Keep job blocks together */
+        }
+
+        .job-header {
+            overflow: hidden;
+            /* Clear float */
+            margin-bottom: 0.2rem;
+            border-bottom: 1px dotted #eee;
+            padding-bottom: 2px;
+        }
+
+        .job-title-block {
+            float: left;
+            width: 70%;
+        }
+
+        .job-date-block {
+            float: right;
+            width: 30%;
+            text-align: right;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #000;
+        }
+
+        .company {
+            color: #666;
+            font-style: italic;
+        }
+
+        .company-desc {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Personal Info - Simple Table-like Layout using spans/divs */
+        .personal-info-item {
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .personal-label {
+            font-weight: bold;
+            color: #666;
+            display: inline-block;
+            width: 150px;
+        }
+
+        .personal-val {
+            display: inline-block;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .actions {
+                display: none;
+            }
+
+            .container {
+                box-shadow: none;
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="actions">
+        <button class="btn" onclick="window.print()">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path
+                    d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" />
+            </svg>
+            Print / Save as PDF
+        </button>
+        <button class="btn" onclick="exportWord()">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path
+                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+            </svg>
+            Download as Word
+        </button>
+    </div>
+
+    <!-- Resume Content ID is used for Export -->
+    <div class="container" id="resume-content">
+        <header>
+            <h1>Thomson C R</h1>
+            <div class="contact-info">
+                <span>📞 +91 9686293737</span>
+                <span>✉️ sony.thomsoncr2@gmail.com</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Professional Summary</h2>
+            <p>Results-oriented Banking & Financial Services Professional with over 12 years of comprehensive experience
+                in NBFC and Banking sectors. Expertise lies in Sales Management, Business Development, Credit
+                Administration, and Team Leadership within the Home Loan and Mortgage divisions. Proven track record of
+                driving branch profitability, managing robust channel partner networks (DST/DSA), and ensuring strict
+                adherence to credit policies and fraud prevention protocols.</p>
+        </section>
+
+        <section>
+            <h2>Core Competencies</h2>
+            <ul class="skills-list">
+                <li>Sales Strategy & Biz Dev</li>
+                <li>Channel Management (DSA)</li>
+                <li>Credit Risk & Fraud Mgmt</li>
+                <li>Team Leadership</li>
+                <li>Relationship Management</li>
+                <li>Portfolio Management</li>
+                <li>Regulatory Compliance</li>
+                <li>Market Analysis</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">Sales Manager</span> | <span class="company">Aditya Birla Housing
+                            Finance Ltd</span>
+                    </div>
+                    <div class="job-date-block">May 2024 – Present</div>
+                </div>
+                <div class="company-desc">(A Leading NBFC providing Home Loans, Mortgage Loans, and Financial Solutions)
+                </div>
+                <ul>
+                    <li><strong>Strategic Business Planning:</strong> Formulate and execute comprehensive sales
+                        strategies to accomplish branch targets and drive revenue growth.</li>
+                    <li><strong>Channel Management:</strong> Recruit, onboard, and manage a high-performing network of
+                        Connectors and Direct Sales Teams (DST).</li>
+                    <li><strong>Credit Quality:</strong> Focus on in-depth analysis of financial documents (KYC, Income
+                        Proofs) to prevent fraudulent activities.</li>
+                    <li><strong>Customer Experience:</strong> Spearhead initiatives to enhance customer service
+                        standards and reduce TAT.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">Sales Manager</span> | <span class="company">Tata Capital Ltd</span>
+                    </div>
+                    <div class="job-date-block">Oct 2023 – April 2024</div>
+                </div>
+                <ul>
+                    <li><strong>Target Achievement:</strong> Successfully managed branch sales operations, meeting
+                        business targets for Home Loans.</li>
+                    <li><strong>Team Management:</strong> Led and motivated internal sales officers and external
+                        connectors.</li>
+                    <li><strong>Fraud Prevention:</strong> Implemented rigorous document verification processes to
+                        mitigate risks.</li>
+                    <li><strong>Operational Excellence:</strong> Coordinated with Credit/Ops teams for smooth processing
+                        and timely disbursements.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">Sales Manager</span> | <span class="company">ICICI Home Finance
+                            Ltd</span>
+                    </div>
+                    <div class="job-date-block">Feb 2019 – Aug 2023</div>
+                </div>
+                <ul>
+                    <li><strong>Business Growth:</strong> Expanded the branch's loan book by driving sales of Home Loans
+                        and LAP.</li>
+                    <li><strong>Performance Monitoring:</strong> Conducted regular reviews of DST and Connector
+                        performance.</li>
+                    <li><strong>Risk Mitigation:</strong> Conducted thorough due diligence of loan applications.</li>
+                    <li><strong>Process Adherence:</strong> Ensured 100% compliance with internal audit and RBI
+                        guidelines.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">Business Dev. Associate</span> | <span class="company">Sundaram BNP
+                            Paribas Home Finance</span>
+                    </div>
+                    <div class="job-date-block">Aug 2016 – Jan 2019</div>
+                </div>
+                <ul>
+                    <li><strong>Market Penetration:</strong> Identified key areas for business expansion in Mysore
+                        region.</li>
+                    <li><strong>DSA/DST Networking:</strong> Nurtured a robust network of Direct Selling Agents.</li>
+                    <li><strong>File Assessment:</strong> Performed preliminary hold analysis and booking of files.</li>
+                    <li><strong>Documentation:</strong> Managed end-to-end documentation to prevent rejections.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">Credit Admin Executive</span> | <span class="company">Shriram City Union
+                            Finance Ltd</span>
+                    </div>
+                    <div class="job-date-block">Sept 2015 – Aug 2016</div>
+                </div>
+                <ul>
+                    <li><strong>Credit Appraisal:</strong> Conducted detailed credit appraisal of loan applications.
+                    </li>
+                    <li><strong>Sanctioning:</strong> Processed findings for loan sanctions alignment with policies.
+                    </li>
+                    <li><strong>Post-Disbursal:</strong> Managed post-disbursal monitoring and repayments.</li>
+                    <li><strong>Fraud Control:</strong> Executed in-depth analysis of borrower documents.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">Junior Officer</span> | <span class="company">ADFC Pvt Ltd (HDFC
+                            Bank)</span>
+                    </div>
+                    <div class="job-date-block">Jan 2012 – Sept 2015</div>
+                </div>
+                <ul>
+                    <li><strong>CASA Operations:</strong> Handled verification of Current/Savings Account forms.</li>
+                    <li><strong>Customer Service:</strong> Provided prompt resolution to customer queries.</li>
+                    <li><strong>Collection:</strong> Assisted in collection operations and asset quality maintenance.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section style="page-break-inside: avoid;">
+            <h2>Education</h2>
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">M.COM (Master of Commerce)</span>
+                    </div>
+                    <div class="job-date-block">Dec 2013</div>
+                </div>
+                <div class="company">Karnataka State Open University (KSOU), Mysore</div>
+            </div>
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title-block">
+                        <span class="job-title">B.COM (Bachelor of Commerce)</span>
+                    </div>
+                    <div class="job-date-block">Dec 2010</div>
+                </div>
+                <div class="company">Vidya Varadhaka First Grade College, Mysore</div>
+            </div>
+        </section>
+
+        <section style="page-break-inside: avoid;">
+            <h2>Personal Profile</h2>
+            <div class="personal-info-item">
+                <span class="personal-label">Date of Birth:</span>
+                <span class="personal-val">28th March, 1989</span>
+            </div>
+            <div class="personal-info-item">
+                <span class="personal-label">Nationality:</span>
+                <span class="personal-val">Indian</span>
+            </div>
+            <div class="personal-info-item">
+                <span class="personal-label">Languages:</span>
+                <span class="personal-val">English, Hindi, Kannada</span>
+            </div>
+            <div class="personal-info-item">
+                <span class="personal-label">Interests:</span>
+                <span class="personal-val">Reading Books, Trekking</span>
+            </div>
+        </section>
+
+        <section style="page-break-inside: avoid;">
+            <h2>Technical Skills</h2>
+            <ul class="skills-list">
+                <li>MS Office Suite</li>
+                <li>Banking CRM Software</li>
+                <li>Computer Proficiency</li>
+                <li>Oracle & Java Basics</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <script>
+        function exportWord() {
+            // We inject the styles directly into the header of the exported HTML
+            // This ensures Word sees the styling.
+            var styles = `
+            <style>
+                @page {
+                    margin: 0.5in; /* Narrow Margins */
+                    size: A4;
+                }
+                body { 
+                    font-family: Arial, sans-serif; 
+                    font-size: 10pt; /* Reduced font size */
+                    line-height: 1.3; 
+                    color: #333; 
+                }
+                h1 { 
+                    font-size: 18pt; 
+                    color: #2c3e50; 
+                    margin-bottom: 2pt; 
+                    text-align: center; 
+                    text-transform: uppercase;
+                }
+                .contact-info { 
+                    text-align: center; 
+                    color: #555; 
+                    margin-bottom: 10pt; 
+                    font-size: 9pt; 
+                }
+                h2 { 
+                    font-size: 12pt; 
+                    color: #2c3e50; 
+                    border-bottom: 1px solid #ccc; 
+                    padding-bottom: 2pt; 
+                    margin-top: 10pt; 
+                    margin-bottom: 5pt; 
+                    text-transform: uppercase; 
+                    font-weight: bold;
+                }
+                p { margin-top: 0; margin-bottom: 5pt; text-align: justify; }
+                ul { margin-top: 2pt; margin-bottom: 2pt; padding-left: 15pt; }
+                li { margin-bottom: 2pt; }
+                
+                /* Job Block */
+                .job-header { 
+                    margin-bottom: 2pt; 
+                    margin-top: 8pt; 
+                    overflow: hidden; 
+                    border-bottom: none;
+                }
+                .job-title-block { 
+                    float: left; 
+                    font-weight: bold; 
+                    font-size: 10.5pt;
+                    color: #000;
+                }
+                .job-date-block { 
+                    float: right; 
+                    text-align: right; 
+                    color: #666; 
+                    font-size: 9pt; 
+                    font-weight: normal;
+                }
+                .company-desc { 
+                    font-size: 8pt; 
+                    color: #555; 
+                    margin-bottom: 2pt; 
+                    font-style: italic; 
+                }
+                
+                /* Skills and Personal Info - Simplified as standard lists for Word safety */
+                .skills-list { 
+                    list-style: none; 
+                    padding: 0; 
+                    margin: 0; 
+                }
+                .skills-list li { 
+                    display: inline; /* Attempt inline for comma-like effect or just allow natural wrap */
+                    margin-right: 10pt;
+                    color: #333;
+                }
+                
+                .personal-info-item { margin-bottom: 2pt; }
+                .personal-label { font-weight: bold; margin-right: 5pt; }
+                
+                /* Keep things compact */
+                .job { page-break-inside: avoid; margin-bottom: 5pt; }
+                section { page-break-inside: avoid; margin-bottom: 8pt; }
+            </style>
+        `;
+
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+                "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+                "xmlns='http://www.w3.org/TR/REC-html40'>" +
+                "<head><meta charset='utf-8'><title>Resume</title>" + styles + "</head><body>";
+            var footer = "</body></html>";
+
+            // Get content
+            var content = document.getElementById("resume-content").innerHTML;
+
+            // Simple clean up for export if needed (optional)
+            var sourceHTML = header + content + footer;
+
+            var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+            var fileDownload = document.createElement("a");
+            document.body.appendChild(fileDownload);
+            fileDownload.href = source;
+            fileDownload.download = 'Thomson_CR_Resume_v2.doc';
+            fileDownload.click();
+            document.body.removeChild(fileDownload);
+        }
+    </script>
+
+</body>
+
+</html>
